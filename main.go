@@ -23,10 +23,6 @@ func main() {
 		results = append(results, square)
 	}
 
-	// Закрываем каналы
-	close(numbers)
-	close(squares)
-
 	// Выводим результаты
 	fmt.Println("Квадраты чисел:", results)
 }
@@ -37,6 +33,7 @@ func generateNumbers(ch chan<- int) {
 		num := rand.Intn(101) // случайное число от 0 до 100
 		ch <- num
 	}
+	close(ch)
 }
 
 // Вторая горутина - возводит числа в квадрат
@@ -44,4 +41,5 @@ func squareNumbers(in <-chan int, out chan<- int) {
 	for num := range in {
 		out <- num * num
 	}
+	close(out)
 }
