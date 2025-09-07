@@ -16,7 +16,7 @@ func NewHalloHandler(router *http.ServeMux) {
 
 func (handler *HalloHandler) Hello() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		randomNumber := rand.Intn(100)
+		randomNumber := rand.Intn(6)
 		strNumber := strconv.Itoa(randomNumber)
 		fmt.Println(randomNumber)
 		w.Write([]byte(strNumber))
